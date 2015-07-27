@@ -6,18 +6,34 @@
         </BlueAcorn_ShippingMethod>
     </modules>
     <global>
-        <resources>
-            <blueacorn_shippingmethod_setup>
-                <setup>
-                    <module>BlueAcorn_ShippingMethod</module>
-                </setup>
-            </blueacorn_shippingmethod_setup>
-        </resources>
+        <models>
+            <shippingMethod>
+                <class>BlueAcorn_ShippingMethod_Model</class>
+            </shippingMethod>
+        </models>
+        <sales>
+            <shipping>
+                <carriers>
+                    <custommethod>
+                        <class>BlueAcorn_ShippingMethod_Model_Shipping_Carrier_CustomMethod</class>
+                    </custommethod>
+                </carriers>
+            </shipping>
+        </sales>
         <helpers>
             <blueacorn_shippingmethod>
                 <class>BlueAcorn_ShippingMethod_Helper</class>
             </blueacorn_shippingmethod>
         </helpers>
     </global>
-    <default/>
+    <default>
+        <carriers>
+            <blueacornshipping>
+                <active>0</active>
+                <title>Blue Acorn Custom Shipping</title>
+                <name>Weight Based</name>
+                <connectionerrormessage>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</connectionerrormessage>
+            </blueacornshipping>
+        </carriers>
+    </default>
 </config>
