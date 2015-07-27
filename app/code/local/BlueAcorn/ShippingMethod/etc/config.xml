@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <BlueAcorn_ShippingMethod>
+            <version>1.0.0</version>
+        </BlueAcorn_ShippingMethod>
+    </modules>
+    <global>
+        <resources>
+            <blueacorn_shippingmethod_setup>
+                <setup>
+                    <module>BlueAcorn_ShippingMethod</module>
+                </setup>
+            </blueacorn_shippingmethod_setup>
+        </resources>
+        <helpers>
+            <blueacorn_shippingmethod>
+                <class>BlueAcorn_ShippingMethod_Helper</class>
+            </blueacorn_shippingmethod>
+        </helpers>
+    </global>
+    <default/>
+</config>
