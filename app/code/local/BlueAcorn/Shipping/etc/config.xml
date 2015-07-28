@@ -23,6 +23,7 @@
                 <active>1</active>
                 <model>blueacorn_shipping/carrier</model>
                 <title>Blue Acorn Custom Shipping</title>
+                <name>Blue Acorn Custom Shipping</name>
                 <sallowspecific>1</sallowspecific>
             </blueacorn_shipping>
         </carriers>

@@ -27,8 +27,8 @@ class BlueAcorn_Shipping_Model_Carrier
         $method->setCarrier($this->_code);
         $method->setCarrierTitle($this->getConfigData('title'));
 
-        $method->setMethod('method');
-        $method->setMethodTitle('Method Title in Carrier.php:collectRates');
+        $method->setMethod($this->_code);
+        $method->setMethodTitle($this->getConfigData('name'));
 
         $method->setPrice(13.37);
         $method->setCost(0);
@@ -41,7 +41,7 @@ class BlueAcorn_Shipping_Model_Carrier
      */
     public function getAllowedMethods() {
         return array(
-            'method'=>'Method Title in Carrier.php:getAllowedMethods'
+            $this->_code => $this->getConfigData('name')
         );
     }
 }
