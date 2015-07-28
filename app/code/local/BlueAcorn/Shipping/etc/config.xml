@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <BlueAcorn_Shipping>
+            <version>1.0.0</version>
+        </BlueAcorn_Shipping>
+    </modules>
+    <global>
+        <models>
+            <blueacorn_shipping>
+                <class>BlueAcorn_Shipping_Model</class>
+            </blueacorn_shipping>
+        </models>
+        <helpers>
+            <blueacorn_shipping>
+                <class>BlueAcorn_Shipping_Helper</class>
+            </blueacorn_shipping>
+        </helpers>
+    </global>
+    <default>
+        <carriers>
+            <blueacorn_shipping>
+                <active>1</active>
+                <model>blueacorn_shipping/carrier</model>
+                <title>Blue Acorn Custom Shipping</title>
+                <sallowspecific>1</sallowspecific>
+            </blueacorn_shipping>
+        </carriers>
+    </default>
+</config>
