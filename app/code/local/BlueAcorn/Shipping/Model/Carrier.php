@@ -15,12 +15,40 @@ class BlueAcorn_Shipping_Model_Carrier
         /** @var Mage_Shipping_Model_Rate_Result $result */
         $result = Mage::getModel('shipping/rate_result');
 
-        $result->append($this->_getShippingMethod());
+        $totalWeight = 0;
+        foreach ($request->getAllItems() as $item) {
+            $totalWeight += $item->getWeight() * $item->getQty();
+        }
+        /** @var string $hostname */
+        $hostname = $this->getConfigData('hostname');
+
+        /** @var string $port */
+        $port = $this->getConfigData('port');
+
+        try {
+            $client = new Zend_Http_Client();
+            $response = $client->setUri(
+                "http://localhost:3000/"
+            )->setRawData(
+                json_encode(['totalWeight'=>$totalWeight])
+            )->setEncType(
+                'application/json'
+            )->request('POST');
+
+            $responseBody = json_decode($response->getBody());
+            $result->append($this->_getShippingMethod($responseBody->rate));
+        } catch (Exception $e) {
+            var_dump($e);
+        }
 
         return $result;
     }
 
-    protected function _getShippingMethod() {
+    /**
+     * @param string|float|int $price
+     * @return Mage_Shipping_Model_Rate_Result_Method
+     */
+    protected function _getShippingMethod($price) {
         /** @var Mage_Shipping_Model_Rate_Result_Method $method */
         $method = Mage::getModel('shipping/rate_result_method');
 
@@ -30,7 +58,7 @@ class BlueAcorn_Shipping_Model_Carrier
         $method->setMethod($this->_code);
         $method->setMethodTitle($this->getConfigData('name'));
 
-        $method->setPrice(13.37);
+        $method->setPrice($price);
         $method->setCost(0);
 
         return $method;
@@ -40,8 +68,8 @@ class BlueAcorn_Shipping_Model_Carrier
      * @return array
      */
     public function getAllowedMethods() {
-        return array(
+        return [
             $this->_code => $this->getConfigData('name')
-        );
+        ];
     }
 }
