@@ -28,15 +28,23 @@ class BlueAcorn_Shipping_Model_Carrier
         try {
             $client = new Zend_Http_Client();
             $response = $client->setUri(
-                "http://localhost:3000/"
+                "http://{$hostname}:{$port}/"
             )->setRawData(
                 json_encode(['totalWeight'=>$totalWeight])
             )->setEncType(
                 'application/json'
             )->request('POST');
 
-            $responseBody = json_decode($response->getBody());
-            $result->append($this->_getShippingMethod($responseBody->rate));
+            switch ($response->getStatus()) {
+                case 200:
+                    $responseBody = json_decode($response->getBody());
+                    $result->append($this->_getShippingMethod($responseBody->rate));
+                    break;
+                case 500:
+                    // Handle 500 Error
+                    break;
+                default;
+            }
         } catch (Exception $e) {
             var_dump($e);
         }
