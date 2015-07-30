@@ -22,5 +22,5 @@ Start node server.
 
 ```unix
 cd /path/to/magento/installation
-node
+node shippingCarrierServer.js
 ```
